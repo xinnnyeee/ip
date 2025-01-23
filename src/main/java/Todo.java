@@ -1,9 +1,11 @@
 public class Todo {
     private String description;
     private boolean done;
+    private int number;
 
     public Todo(String description) {
         this.description = description;
+        
         this.done = false;
     }
 
@@ -11,12 +13,23 @@ public class Todo {
         this.done = true;
     }
 
+    public boolean isDone() {
+        return done;
+    }
+
+    public void unDo() {
+        this.done = false;
+    }
+
     public String toString() {
+        return description; 
+    }
+
+    public String printDone() {
         if (done) {
-            return String.format("[X] %s", description);
+            return "[X]";
         } else {
-            return String.format("[ ] %s", description);
+            return "[ ]";
         }
-        
     }
 }
