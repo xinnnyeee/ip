@@ -1,11 +1,9 @@
 public class Todo {
     private String description;
     private boolean done;
-    private int number;
 
     public Todo(String description) {
         this.description = description;
-        
         this.done = false;
     }
 
