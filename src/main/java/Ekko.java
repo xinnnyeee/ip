@@ -8,8 +8,7 @@ public class Ekko {
     }
 
     public static void exit() {
-        System.out.println("Bye. Hope to see you again soon! ");
-        linebreak();
+        reply("Bye. Hope to see you again soon! ");
     }
 
     public static void echo(String text) {
