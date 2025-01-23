@@ -6,7 +6,8 @@ public class Deadline extends Todo {
         this.dueDate = dueDate;
     }
 
+    @Override
     public String toString() {
-        return String.format("[D] %s (by: %s)", super.printFull(), this.dueDate);
+        return String.format("[D] %s (by: %s)", super.toString(), this.dueDate);
     }
 }

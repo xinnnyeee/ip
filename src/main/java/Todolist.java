@@ -24,4 +24,18 @@ public class Todolist {
         }
     }
 
+    public String unmark(int index) {
+        Todo target = list.get(index - 1);
+        target.unDo();
+        return String.format("Meow, please remember to do it still...\n%s", target.toString());
+    }
+
+    public String delete(int index) {
+        Todo target = list.get(index - 1);
+        list.remove(index - 1);
+        count -= 1;
+        return String.format("Ekko has eaten your task!\n\t%s\nOnly %d tasks left! Jiayouu", 
+            target.toString(), count);
+    }
+
 }

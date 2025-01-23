@@ -8,8 +8,9 @@ public class Event extends Todo {
         this.end = end;
     }
 
+    @Override
     public String toString() {
         return String.format("[E] %s (from: %s to: %s)", 
-            super.printFull(), this.start, this.end);
+            super.toString(), this.start, this.end);
     }
 }

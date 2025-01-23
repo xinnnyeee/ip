@@ -19,7 +19,7 @@ public class Todo {
         this.done = false;
     }
 
-    public String toString() {
+    public String printDes() {
         return description; 
     }
 
@@ -29,5 +29,9 @@ public class Todo {
         } else {
             return "[ ]";
         }
+    }
+
+    public String toString() {
+        return String.format("%s %s", printDone(), printDes());
     }
 }
