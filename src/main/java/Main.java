@@ -55,8 +55,12 @@ public class Main {
                         // reply(String) not used bcz printList() uses System.out directly
                         Ekko.linebreak();
                         break;
-                    
-                }
+                    case Commands.DEADLINE: 
+                        des = input.split(" ",2)[1].split("/by")[0];
+                        String dueDate = input.split("/by")[1];
+                        resp = todolist.add(new Deadline(des, dueDate));
+                        Ekko.reply(resp);
+                }   
             } catch (IllegalArgumentException e) {
                 // error message
                 Ekko.reply("Meow, sorry I am just a little Ekko. ");

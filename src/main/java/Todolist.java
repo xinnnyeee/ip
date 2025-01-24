@@ -13,7 +13,7 @@ public class Todolist {
     public String add(Todo task) {
         this.count += 1;
         list.add(task);
-        return String.format("added: %s", task.toString());
+        return String.format("Got it! I've added this task: \n%s\nNow you have %d task(s) in the list.", task.toString(), count);
     }
 
     public void printList() {
