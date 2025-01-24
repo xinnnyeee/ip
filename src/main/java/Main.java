@@ -60,12 +60,23 @@ public class Main {
                         String dueDate = input.split("/by")[1];
                         resp = todolist.add(new Deadline(des, dueDate));
                         Ekko.reply(resp);
+                        break;
+                    case Commands.EVENT:
+                        des = input.split(" ",2)[1];
+                        String start = des.split("/from")[1].split("/to")[0];
+                        String end = des.split("/to")[1];
+                        des = des.split("/from")[0];
+                        resp = todolist.add(new Event(des, start, end));
+                        Ekko.reply(resp);
+                        break;
                 }   
             } catch (IllegalArgumentException e) {
                 // error message
                 Ekko.reply("Meow, sorry I am just a little Ekko. ");
                 
-            } 
+            } catch (ArrayIndexOutOfBoundsException e) {
+                Ekko.reply("Meow, please complete your command!");
+            }
             
         }
 
