@@ -69,6 +69,11 @@ public class Main {
                         resp = todolist.add(new Event(des, start, end));
                         Ekko.reply(resp);
                         break;
+                    case Commands.DELETE:
+                        index = Integer.parseInt(parts[1]);
+                        resp = todolist.delete(index);
+                        Ekko.reply(resp);
+                        break;
                 }   
             } catch (IllegalArgumentException e) {
                 // error message
