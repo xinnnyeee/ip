@@ -9,6 +9,7 @@ public class Ekko {
 
     public static void exit() {
         reply("Bye. Hope to see you again soon! ");
+        System.exit(0);
     }
 
     public static void echo(String text) {

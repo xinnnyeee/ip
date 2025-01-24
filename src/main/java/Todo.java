@@ -32,6 +32,6 @@ public class Todo {
     }
 
     public String toString() {
-        return String.format("%s %s", printDone(), printDes());
+        return String.format("[T] %s %s", printDone(), printDes());
     }
 }

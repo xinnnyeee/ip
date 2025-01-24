@@ -30,6 +30,12 @@ public class Todolist {
         return String.format("Meow, please remember to do it still...\n%s", target.toString());
     }
 
+    public String mark(int index) {
+        Todo target = list.get(index - 1);
+        target.markDone();
+        return String.format("Yippee! One task off the list: \n%s", target.toString());
+    }
+
     public String delete(int index) {
         Todo target = list.get(index - 1);
         list.remove(index - 1);
