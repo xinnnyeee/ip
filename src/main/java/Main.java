@@ -33,7 +33,8 @@ public class Main {
                 switch(command) {
                     case Commands.TODO: 
                         des = input.split(" ",2)[1];
-                        todolist.add(new Todo(des));
+                        resp = todolist.add(new Todo(des));
+                        Ekko.reply(resp);
                         break;
                     case Commands.BYE:
                         Ekko.exit();

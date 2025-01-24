@@ -19,8 +19,7 @@ public class Todolist {
     public void printList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= count; i++) {
-            System.out.printf("%d. %s %s", i, this.list.get(i - 1).printDone(), 
-            this.list.get(i - 1).toString());
+            System.out.printf("%d. %s \n", i, this.list.get(i - 1).toString());
         }
     }
 
