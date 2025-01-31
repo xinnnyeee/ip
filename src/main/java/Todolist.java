@@ -39,7 +39,7 @@ public class Todolist {
         Todo target = list.get(index - 1);
         list.remove(index - 1);
         count -= 1;
-        return String.format("Ekko has eaten your task!\n\t%s\nOnly %d tasks left! Jiayouu", 
+        return String.format("Ekko has eaten your task!\n%s\nOnly %d tasks left! Jiayouu",
             target.toString(), count);
     }
 

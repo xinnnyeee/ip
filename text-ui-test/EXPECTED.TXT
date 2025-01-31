@@ -9,43 +9,34 @@ Hello! I'm EKKO
 What can I do for you?
 (Input 'bye' to exit)
 =============================================
-todo running
 Ekko: Got it! I've added this task: 
 [T] [ ] running
 Now you have 1 task(s) in the list. 
 =============================================
-deadline hi /by 1pm
 Ekko: Got it! I've added this task: 
 [D] [ ] hi  (by:  1pm)
 Now you have 2 task(s) in the list. 
 =============================================
-mark 2
 Ekko: Yippee! One task off the list: 
 [D] [X] hi  (by:  1pm) 
 =============================================
-event hi /from 1 /to 2
 Ekko: Got it! I've added this task: 
 [E] [ ] hi  (from:  1  to:  2)
 Now you have 3 task(s) in the list. 
 =============================================
-mark 3
 Ekko: Yippee! One task off the list: 
 [E] [X] hi  (from:  1  to:  2) 
 =============================================
-unmark 2
 Ekko: Meow, please remember to do it still...
 [D] [ ] hi  (by:  1pm) 
 =============================================
-delete 1
 Ekko: Ekko has eaten your task!
-        [T] [ ] running
+[T] [ ] running
 Only 2 tasks left! Jiayouu 
 =============================================
-list
 Here are the tasks in your list:
 1. [D] [ ] hi  (by:  1pm) 
 2. [E] [X] hi  (from:  1  to:  2) 
 =============================================
-bye
 Ekko: Bye. Hope to see you again soon!  
 =============================================

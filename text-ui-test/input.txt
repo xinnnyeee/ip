@@ -1,5 +1,5 @@
 todo running
-deadline hi /by 1pm 
+deadline hi /by 1pm
 mark 2
 event hi /from 1 /to 2
 mark 3
