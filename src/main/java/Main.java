@@ -1,14 +1,13 @@
-import java.time.LocalDateTime;
-import java.util.Objects;
-import java.util.Scanner;
 import java.io.File;
-import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
 
 public class Main {
 
     public static void main(String[] args) {
         Ekko.greet();
-        String dirPath = Storage.makeDir();
+        Storage storage = new Storage();
+        String filePath = storage.createFile("ekko.txt");
         Todolist todolist = new Todolist();
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
@@ -17,11 +16,11 @@ public class Main {
             try {
                 Commands command = Parser.parseCommand(input);
                 int index;
-                String des;
                 String resp;
                 switch(command) {
                     case TODO:
                         resp = todolist.add(Parser.parseTodo(input));
+                        storage.updateFile(filePath, todolist);
                         Ekko.reply(resp);
                         break;
                     case BYE:
@@ -30,11 +29,13 @@ public class Main {
                     case MARK:
                         index = Integer.parseInt(parts[1]);
                         resp = todolist.mark(index);
+                        storage.updateFile(filePath, todolist);
                         Ekko.reply(resp);
                         break;
                     case UNMARK:
                         index = Integer.parseInt(parts[1]);
                         resp = todolist.unmark(index);
+                        storage.updateFile(filePath, todolist);
                         Ekko.reply(resp);
                         break;
                     case LIST:
@@ -43,15 +44,18 @@ public class Main {
                         break;
                     case DEADLINE:
                         resp = todolist.add(Parser.parseDeadline(input));
+                        storage.updateFile(filePath, todolist);
                         Ekko.reply(resp);
                         break;
                     case EVENT:
                         resp = todolist.add(Parser.parseEvent(input));
+                        storage.updateFile(filePath, todolist);
                         Ekko.reply(resp);
                         break;
                     case DELETE:
                         index = Integer.parseInt(parts[1]);
                         resp = todolist.delete(index);
+                        storage.updateFile(filePath, todolist);
                         Ekko.reply(resp);
                         break;
                     case MEOW:

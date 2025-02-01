@@ -4,6 +4,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+/**
+ * Handle the parsing of user's input.
+ */
 public class Parser {
 
     private static final List<DateTimeFormatter> DATE_TIME_FORMATTERS = List.of(

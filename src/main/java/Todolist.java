@@ -1,31 +1,41 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.File;
+import java.util.stream.Collectors;
 
+/**
+ * A collection of all the possible activities (todos).
+ */
 public class Todolist {
     private int count;
     private List<Todo> list;
-    private String filePath;
-
 
     public Todolist() {
         this.count = 0;
         this.list = new ArrayList<>();
-        this.filePath = "data/ekko.txt";
-        File file = new File(filePath);
     }
 
+    /**
+     * Get the number of current items in the to-do list.
+     * @return
+     */
+    public int getCount() {
+        return count;
+    }
 
+    /**
+     * Adding a Todo to the list.
+     * @param task a todo
+     * @return String notation for completing the task
+     */
     public String add(Todo task) {
         this.count += 1;
         list.add(task);
-        updateFile();
         return String.format("Got it! I've added this task: \n%s\nNow you have %d task(s) in the list.", task.toString(), count);
     }
 
+    /**
+     * Print out the todolist.
+     */
     public void printList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= count; i++) {
@@ -33,37 +43,48 @@ public class Todolist {
         }
     }
 
+    /**
+     * Convert the todolist to a long String, separated by new lines.
+     * @return
+     */
+    public String toString() {
+        String content = list.stream().map(Todo::toString).collect(Collectors.joining("\n"));
+        return content;
+    }
+
+    /**
+     * Unmark a Todo on the list.
+     * @param index the index number of the item
+     * @return completion message
+     */
     public String unmark(int index) {
         Todo target = list.get(index - 1);
         target.unDo();
-        updateFile();
         return String.format("Meow, please remember to do it still...\n%s", target.toString());
     }
 
+    /**
+     * Mark a Todo as done.
+     * @param index the index number of the item
+     * @return completion message
+     */
     public String mark(int index) {
         Todo target = list.get(index - 1);
         target.markDone();
-        updateFile();
         return String.format("Yippee! One task off the list: \n%s", target.toString());
     }
 
+    /**
+     * Delete a Todo from the list.
+     * @param index the index number of the item
+     * @return completion message
+     */
     public String delete(int index) {
         Todo target = list.get(index - 1);
         list.remove(index - 1);
         count -= 1;
-        updateFile();
         return String.format("Ekko has eaten your task!\n%s\nOnly %d tasks left! Jiayouu",
             target.toString(), count);
-    }
-
-    public void updateFile() {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
-            for (int i = 0; i < count; i++) {
-                bw.write(list.get(i).toString() + "\n");
-            }
-        } catch (IOException e) {
-            System.out.println("Uh oh, something went wrong when trying to create a file.");
-        }
     }
 
 }
