@@ -69,7 +69,7 @@ public class Main {
                     case DEADLINE:
                         des = input.split(" ",2)[1].split("/by")[0];
                         String dueDate = input.split("/by ")[1];
-                        LocalDate localDate = LocalDate.parse(dueDate, formatter);
+                        LocalDateTime localDate = LocalDateTime.parse(dueDate, formatter);
                         resp = todolist.add(new Deadline(des, localDate));
                         Ekko.reply(resp);
                         break;

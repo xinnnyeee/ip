@@ -1,9 +1,9 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Deadline extends Todo {
-    private LocalDate dueDate;
+    private LocalDateTime dueDate;
 
-    public Deadline(String description, LocalDate dueDate) {
+    public Deadline(String description, LocalDateTime dueDate) {
         super(description);
         this.dueDate = dueDate;
     }
