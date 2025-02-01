@@ -1,13 +1,15 @@
-public class Deadline extends Todo {
-    private String dueDate;
+import java.time.LocalDate;
 
-    public Deadline(String description, String dueDate) {
+public class Deadline extends Todo {
+    private LocalDate dueDate;
+
+    public Deadline(String description, LocalDate dueDate) {
         super(description);
         this.dueDate = dueDate;
     }
 
     @Override
     public String toString() {
-        return String.format("[D] %s %s (by: %s)", super.printDone(), super.printDes(), this.dueDate);
+        return String.format("[D] %s %s (by: %s)", super.printDone(), super.printDes(), this.dueDate.toString());
     }
 }

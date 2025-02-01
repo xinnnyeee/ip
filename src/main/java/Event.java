@@ -1,8 +1,10 @@
-public class Event extends Todo {
-    private String start;
-    private String end;
+import java.time.LocalDateTime;
 
-    public Event(String description, String start, String end) {
+public class Event extends Todo {
+    private LocalDateTime start;
+    private LocalDateTime end;
+
+    public Event(String description, LocalDateTime start, LocalDateTime end) {
         super(description);
         this.start = start;
         this.end = end;
@@ -11,6 +13,6 @@ public class Event extends Todo {
     @Override
     public String toString() {
         return String.format("[E] %s %s (from: %s to: %s)", 
-            super.printDone(), super.printDes(), this.start, this.end);
+            super.printDone(), super.printDes(), this.start.toString(), this.end.toString());
     }
 }

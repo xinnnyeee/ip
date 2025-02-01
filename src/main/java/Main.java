@@ -1,6 +1,8 @@
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.io.File;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Main {
     public enum Commands {
@@ -38,6 +40,7 @@ public class Main {
                 int index;
                 String des;
                 String resp;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
                 switch(command) {
                     case TODO:
                         des = input.split(" ",2)[1];
@@ -65,16 +68,19 @@ public class Main {
                         break;
                     case DEADLINE:
                         des = input.split(" ",2)[1].split("/by")[0];
-                        String dueDate = input.split("/by")[1];
-                        resp = todolist.add(new Deadline(des, dueDate));
+                        String dueDate = input.split("/by ")[1];
+                        LocalDate localDate = LocalDate.parse(dueDate, formatter);
+                        resp = todolist.add(new Deadline(des, localDate));
                         Ekko.reply(resp);
                         break;
                     case EVENT:
                         des = input.split(" ",2)[1];
-                        String start = des.split("/from")[1].split("/to")[0];
-                        String end = des.split("/to")[1];
+                        String start = des.split("/from ")[1].split(" /to")[0];
+                        LocalDateTime startTime = LocalDateTime.parse(start, formatter);
+                        String end = des.split("/to ")[1];
+                        LocalDateTime endTime = LocalDateTime.parse(end, formatter);
                         des = des.split("/from")[0];
-                        resp = todolist.add(new Event(des, start, end));
+                        resp = todolist.add(new Event(des, startTime, endTime));
                         Ekko.reply(resp);
                         break;
                     case DELETE:
