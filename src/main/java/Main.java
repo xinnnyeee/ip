@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import java.io.File;
 
 
 public class Main {
@@ -7,6 +7,14 @@ public class Main {
         TODO, MARK, UNMARK, LIST, BYE, DEADLINE, EVENT, DELETE
     }
     public static void main(String[] args) {
+        // create a new directory called data if not existing already
+        String projPath = System.getProperty("user.dir");
+        String dirPath = projPath + File.separator + "data";
+        File dir = new File(dirPath);
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+
         Todolist todolist = new Todolist();
         String logo = 
               " _____   _   __  _   __  ______\n"
@@ -31,37 +39,37 @@ public class Main {
                 String des;
                 String resp;
                 switch(command) {
-                    case Commands.TODO: 
+                    case TODO:
                         des = input.split(" ",2)[1];
                         resp = todolist.add(new Todo(des));
                         Ekko.reply(resp);
                         break;
-                    case Commands.BYE:
+                    case BYE:
                         Ekko.exit();
                         break;
-                    case Commands.MARK:
+                    case MARK:
                         // Convert the second part to an integer
                         index = Integer.parseInt(parts[1]); 
                         resp = todolist.mark(index);
                         Ekko.reply(resp);
                         break;
-                    case Commands.UNMARK: 
+                    case UNMARK:
                         index = Integer.parseInt(parts[1]); 
                         resp = todolist.unmark(index);
                         Ekko.reply(resp);
                         break;
-                    case Commands.LIST: 
+                    case LIST:
                         todolist.printList();
                         // reply(String) not used bcz printList() uses System.out directly
                         Ekko.linebreak();
                         break;
-                    case Commands.DEADLINE: 
+                    case DEADLINE:
                         des = input.split(" ",2)[1].split("/by")[0];
                         String dueDate = input.split("/by")[1];
                         resp = todolist.add(new Deadline(des, dueDate));
                         Ekko.reply(resp);
                         break;
-                    case Commands.EVENT:
+                    case EVENT:
                         des = input.split(" ",2)[1];
                         String start = des.split("/from")[1].split("/to")[0];
                         String end = des.split("/to")[1];
@@ -69,7 +77,7 @@ public class Main {
                         resp = todolist.add(new Event(des, start, end));
                         Ekko.reply(resp);
                         break;
-                    case Commands.DELETE:
+                    case DELETE:
                         index = Integer.parseInt(parts[1]);
                         resp = todolist.delete(index);
                         Ekko.reply(resp);
