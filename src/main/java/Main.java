@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import java.io.File;
 
 
 public class Main {
@@ -7,6 +7,14 @@ public class Main {
         TODO, MARK, UNMARK, LIST, BYE, DEADLINE, EVENT, DELETE
     }
     public static void main(String[] args) {
+        // create a new directory called data if not existing already
+        String projPath = System.getProperty("user.dir");
+        String dirPath = projPath + File.separator + "data";
+        File dir = new File(dirPath);
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+
         Todolist todolist = new Todolist();
         String logo = 
               " _____   _   __  _   __  ______\n"

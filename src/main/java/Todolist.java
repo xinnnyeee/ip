@@ -1,14 +1,20 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
 
 public class Todolist {
     private int count;
     private List<Todo> list;
 
+
     public Todolist() {
         this.count = 0;
         this.list = new ArrayList<>();
+        // create a file
+        String filePath = "data/ekko.txt";
+        File file = new File(filePath);
     }
+
 
     public String add(Todo task) {
         this.count += 1;
