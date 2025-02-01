@@ -1,4 +1,3 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -26,8 +25,7 @@ public class Parser {
      * @return String command word
      */
     public static Commands parseCommand(String input) {
-        Commands command = Commands.valueOf(input.split(" ")[0].toUpperCase());
-        return command;
+        return Commands.valueOf(input.split(" ")[0].toUpperCase());
     }
 
     /**

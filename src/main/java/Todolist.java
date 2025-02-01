@@ -16,7 +16,7 @@ public class Todolist {
 
     /**
      * Get the number of current items in the to-do list.
-     * @return
+     * @return int
      */
     public int getCount() {
         return count;
@@ -45,11 +45,10 @@ public class Todolist {
 
     /**
      * Convert the todolist to a long String, separated by new lines.
-     * @return
+     * @return long String separated by new lines
      */
     public String toString() {
-        String content = list.stream().map(Todo::toString).collect(Collectors.joining("\n"));
-        return content;
+        return list.stream().map(Todo::toString).collect(Collectors.joining("\n"));
     }
 
     /**
@@ -60,7 +59,7 @@ public class Todolist {
     public String unmark(int index) {
         Todo target = list.get(index - 1);
         target.unDo();
-        return String.format("Meow, please remember to do it still...\n%s", target.toString());
+        return String.format("Meow, please remember to do it still...\n%s", target);
     }
 
     /**
@@ -71,7 +70,7 @@ public class Todolist {
     public String mark(int index) {
         Todo target = list.get(index - 1);
         target.markDone();
-        return String.format("Yippee! One task off the list: \n%s", target.toString());
+        return String.format("Yippee! One task off the list: \n%s", target);
     }
 
     /**

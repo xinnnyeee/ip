@@ -8,8 +8,8 @@ public class Deadline extends Todo {
 
     /**
      * Create a deadline.
-     * @param description
-     * @param dueDate
+     * @param description task description
+     * @param dueDate date and time when the task is due
      */
     public Deadline(String description, LocalDateTime dueDate) {
         super(description);
@@ -18,7 +18,7 @@ public class Deadline extends Todo {
 
     /**
      * String representation of the deadline.
-     * @return
+     * @return tag, done status and description
      */
     @Override
     public String toString() {
