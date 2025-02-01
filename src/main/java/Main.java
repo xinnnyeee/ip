@@ -1,86 +1,52 @@
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Scanner;
 import java.io.File;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Main {
-    public enum Commands {
-        TODO, MARK, UNMARK, LIST, BYE, DEADLINE, EVENT, DELETE
-    }
+
     public static void main(String[] args) {
-        // create a new directory called data if not existing already
-        String projPath = System.getProperty("user.dir");
-        String dirPath = projPath + File.separator + "data";
-        File dir = new File(dirPath);
-        if (!dir.exists()) {
-            dir.mkdir();
-        }
-
-        Todolist todolist = new Todolist();
-        String logo = 
-              " _____   _   __  _   __  ______\n"
-            + "|  ___| | | / / | | / / |  __  | \n"
-            + "| |___  | '/ /  | '/ /  | |  | | \n"
-            + "|  ___| | |\\ \\  | |\\ \\  | |  | |\n"
-            + "| |___  | | \\ \\ | | \\ \\ | |__| | \n"
-            + "|_____| |_|  \\_\\|_|  \\_\\|______|";
-
-        System.out.println("Hello from\n" + logo);
         Ekko.greet();
+        String dirPath = Storage.makeDir();
+        Todolist todolist = new Todolist();
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
-            // split the input
             String[] parts = input.split(" ");
-
-            // match command to listed ones enum
             try {
-                Commands command = Commands.valueOf(parts[0].toUpperCase());
+                Commands command = Parser.parseCommand(input);
                 int index;
                 String des;
                 String resp;
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
                 switch(command) {
                     case TODO:
-                        des = input.split(" ",2)[1];
-                        resp = todolist.add(new Todo(des));
+                        resp = todolist.add(Parser.parseTodo(input));
                         Ekko.reply(resp);
                         break;
                     case BYE:
                         Ekko.exit();
                         break;
                     case MARK:
-                        // Convert the second part to an integer
-                        index = Integer.parseInt(parts[1]); 
+                        index = Integer.parseInt(parts[1]);
                         resp = todolist.mark(index);
                         Ekko.reply(resp);
                         break;
                     case UNMARK:
-                        index = Integer.parseInt(parts[1]); 
+                        index = Integer.parseInt(parts[1]);
                         resp = todolist.unmark(index);
                         Ekko.reply(resp);
                         break;
                     case LIST:
                         todolist.printList();
-                        // reply(String) not used bcz printList() uses System.out directly
                         Ekko.linebreak();
                         break;
                     case DEADLINE:
-                        des = input.split(" ",2)[1].split("/by")[0];
-                        String dueDate = input.split("/by ")[1];
-                        LocalDateTime localDate = LocalDateTime.parse(dueDate, formatter);
-                        resp = todolist.add(new Deadline(des, localDate));
+                        resp = todolist.add(Parser.parseDeadline(input));
                         Ekko.reply(resp);
                         break;
                     case EVENT:
-                        des = input.split(" ",2)[1];
-                        String start = des.split("/from ")[1].split(" /to")[0];
-                        LocalDateTime startTime = LocalDateTime.parse(start, formatter);
-                        String end = des.split("/to ")[1];
-                        LocalDateTime endTime = LocalDateTime.parse(end, formatter);
-                        des = des.split("/from")[0];
-                        resp = todolist.add(new Event(des, startTime, endTime));
+                        resp = todolist.add(Parser.parseEvent(input));
                         Ekko.reply(resp);
                         break;
                     case DELETE:
@@ -88,11 +54,15 @@ public class Main {
                         resp = todolist.delete(index);
                         Ekko.reply(resp);
                         break;
-                }   
+                    case MEOW:
+                        resp = Parser.parseMeow(input);
+                        Ekko.reply(resp);
+                        break;
+                }
             } catch (IllegalArgumentException e) {
                 // error message
                 Ekko.reply("Meow, sorry I am just a little Ekko. ");
-                
+
             } catch (ArrayIndexOutOfBoundsException e) {
                 Ekko.reply("Meow, please complete your command!");
             }

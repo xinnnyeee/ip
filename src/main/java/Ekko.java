@@ -1,8 +1,16 @@
 
 public class Ekko {
     public static final String NAME = "EKKO";
+    public static final String LOGO =
+            " _____   _   __  _   __  ______\n"
+                    + "|  ___| | | / / | | / / |  __  | \n"
+                    + "| |___  | '/ /  | '/ /  | |  | | \n"
+                    + "|  ___| | |\\ \\  | |\\ \\  | |  | |\n"
+                    + "| |___  | | \\ \\ | | \\ \\ | |__| | \n"
+                    + "|_____| |_|  \\_\\|_|  \\_\\|______|";
 
     public static void greet() {
+        System.out.println("Hello from\n" + LOGO);
         System.out.printf("Hello! I'm %s \nWhat can I do for you?\n(Input 'bye' to exit)\n", NAME);
         linebreak();
     }
