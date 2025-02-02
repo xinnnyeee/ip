@@ -86,4 +86,13 @@ public class Todolist {
             target.toString(), count);
     }
 
+    public String filter(String keyword) {
+        List<Todo> filteredItems = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            if (list.get(i).printDes().contains(keyword)) {
+                filteredItems.add(list.get(i));
+            }
+        }
+        return filteredItems.stream().map(Todo::toString).collect(Collectors.joining("\n"));
+    }
 }
