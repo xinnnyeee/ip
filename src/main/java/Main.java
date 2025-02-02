@@ -61,6 +61,14 @@ public class Main {
                         resp = Parser.parseMeow(input);
                         Ekko.reply(resp);
                         break;
+                    case FIND:
+                        resp = todolist.filter(Parser.parseFind(input));
+                        if (resp.isBlank()) {
+                            Ekko.reply("Nothing found meow, maybe you can add that into your list? ");
+                        } else {
+                            Ekko.reply("Here are the relevant items on your list: \n" + resp);
+                        }
+                        break;
                 }
             } catch (IllegalArgumentException e) {
                 // error message

@@ -13,10 +13,10 @@ public class Parser {
             DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"),
             DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm"),
             DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm"),
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"),
-            DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"),
-            DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss"),
-            DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm:ss")
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH"),
+            DateTimeFormatter.ofPattern("dd/MM/yyyy HH"),
+            DateTimeFormatter.ofPattern("MM-dd-yyyy HH"),
+            DateTimeFormatter.ofPattern("MMM dd, yyyy HH")
     );
 
     /**
@@ -87,5 +87,14 @@ public class Parser {
      */
     public static String parseMeow(String input) {
         return "Meow, I love you too.";
+    }
+
+    /**
+     * Parse input with Find command.
+     * @param input String user input
+     * @return search keyword
+     */
+    public static String parseFind(String input) {
+        return input.split(" ",2)[1];
     }
 }
