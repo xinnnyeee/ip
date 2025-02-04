@@ -1,11 +1,11 @@
 package ekko.core;  //same package as the class being tested
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
-
 import static ekko.core.Parser.parseCommand;
 import static ekko.core.Parser.parseDateTime;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class TestParser {
     @Test
