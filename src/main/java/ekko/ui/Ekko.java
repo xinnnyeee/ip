@@ -41,55 +41,31 @@ public class Ekko {
     public String getResponse(String input) {
         // Check if the input is empty or null, and return the greeting
         if (input == null || input.trim().isEmpty()) {
-            return greet();  // Call the greet method that returns the greeting text
+            return greet();
         }
-
-        String[] parts = input.split(" ");
         try {
             Commands command = Parser.parseCommand(input);
-            int index;
-            String resp;
             switch (command) {
                 case TODO:
-                    resp = todolist.add(Parser.parseTodo(input));
-                    storage.updateFile(todolist);
-                    return resp;
+                    return Parser.parseTodo(todolist, storage, input);
                 case BYE:
                     Ekko.exit();
                 case MARK:
-                    index = Integer.parseInt(parts[1]);
-                    resp = todolist.mark(index);
-                    storage.updateFile(todolist);
-                    return resp;
+                    return Parser.parseMark(todolist, storage, input);
                 case UNMARK:
-                    index = Integer.parseInt(parts[1]);
-                    resp = todolist.unmark(index);
-                    storage.updateFile(todolist);
-                    return resp;
+                    return Parser.parseUnmark(todolist, storage, input);
                 case LIST:
                     return todolist.toString();
                 case DEADLINE:
-                    resp = todolist.add(Parser.parseDeadline(input));
-                    storage.updateFile(todolist);
-                    return resp;
+                    return Parser.parseDeadline(todolist, storage, input);
                 case EVENT:
-                    resp = todolist.add(Parser.parseEvent(input));
-                    storage.updateFile(todolist);
-                    return resp;
+                    return Parser.parseEvent(todolist, storage, input);
                 case DELETE:
-                    index = Integer.parseInt(parts[1]);
-                    resp = todolist.delete(index);
-                    storage.updateFile(todolist);
-                    return resp;
+                    return Parser.parseDelete(todolist, storage, input);
                 case MEOW:
-                    resp = Parser.parseMeow(input);
-                    return resp;
+                    return Parser.parseMeow();
                 case FIND:
-                    resp = todolist.filter(Parser.parseFind(input));
-                    if (resp.isBlank()) {
-                        return "Nothing found meow, maybe you can add that into your list? ";
-                    }
-                    return "Here are the relevant items on your list: \n" + resp;
+                    return Parser.parseFind(todolist, storage, input);
             }
         } catch (IllegalArgumentException e) {
             return"Meow, sorry I am just a little Ekko. ";
