@@ -2,6 +2,7 @@ package ekko.task;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * A collection of all the possible activities (todos).
@@ -29,6 +30,7 @@ public class Todolist {
      * @return String notation for completing the task
      */
     public String add(Todo task) {
+        assert task != null : "Task cannot be null!";
         this.count += 1;
         list.add(task);
         return String.format("Got it! I've added this task: \n%s\nNow you have %d task(s) in the list.", task.toString(), count);
@@ -49,7 +51,9 @@ public class Todolist {
      * @return long String separated by new lines
      */
     public String toString() {
-        return list.stream().map(Todo::toString).collect(Collectors.joining("\n"));
+        return IntStream.range(0, list.size())  // Iterate over list with index
+                .mapToObj(i -> (i + 1) + ". " + list.get(i).toString())  // Prepend count to each task
+                .collect(Collectors.joining("\n"));  // Join them with new lines
     }
 
     /**
@@ -59,6 +63,7 @@ public class Todolist {
      */
     public String unmark(int index) {
         Todo target = list.get(index - 1);
+        assert target.isDone() : "The selected task hasn't been marked meow!";
         target.unDo();
         return String.format("Meow, please remember to do it still...\n%s", target);
     }
@@ -69,6 +74,7 @@ public class Todolist {
      * @return completion message
      */
     public String mark(int index) {
+        assert index > 0 && index <= count : "Index out of bounds for marking task!";
         Todo target = list.get(index - 1);
         target.markDone();
         return String.format("Yippee! One task off the list: \n%s", target);
@@ -80,6 +86,7 @@ public class Todolist {
      * @return completion message
      */
     public String delete(int index) {
+        assert index > 0 && index <= count : "Selected task not in your list!";
         Todo target = list.get(index - 1);
         list.remove(index - 1);
         count -= 1;
