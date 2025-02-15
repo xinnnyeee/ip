@@ -6,6 +6,10 @@ public class Todo {
     private String description;
     private boolean done;
 
+    /**
+     * Instantiate a task
+     * @param description description of the task
+     */
     public Todo(String description) {
         this.description = description;
         this.done = false;

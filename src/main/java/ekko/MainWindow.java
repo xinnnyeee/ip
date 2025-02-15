@@ -23,10 +23,13 @@ public class MainWindow extends AnchorPane {
 
     private Ekko ekko;
 
-    // need to download images
+
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/dino.png"));
     private Image ekkoImage = new Image(this.getClass().getResourceAsStream("/images/ekko.png"));
 
+    /**
+     * Initialise the interface, making sure that the scroll pane can be scrolled down
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

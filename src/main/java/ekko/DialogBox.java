@@ -14,12 +14,20 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * Handle the creation of Dialog Boxes
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Initialise a dialog box with text and profile picture
+     * @param text content of the dialog box
+     * @param img profile picture of the text sender
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -44,10 +52,22 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Create a new dialog box for user
+     * @param s text
+     * @param i image
+     * @return the dialog box
+     */
     public static DialogBox getUserDialog(String s, Image i) {
         return new DialogBox(s, i);
     }
 
+    /**
+     * Create a new dialog box for ekko
+     * @param s text
+     * @param i image
+     * @return the dialog box
+     */
     public static DialogBox getEkkoDialog(String s, Image i) {
         var db = new DialogBox(s, i);
         db.flip();

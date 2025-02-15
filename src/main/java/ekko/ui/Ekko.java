@@ -11,30 +11,39 @@ import ekko.task.Todolist;
 public class Ekko {
     private Storage storage;
     private Todolist todolist;
-    private static final String LOGO =
-            " _____   _   __  _   __  ______\n"
-                    + "|  ___| | | / / | | / / |  __  | \n"
-                    + "| |___  | '/ /  | '/ /  | |  | | \n"
-                    + "|  ___| | |\\ \\  | |\\ \\  | |  | |\n"
-                    + "| |___  | | \\ \\ | | \\ \\ | |__| | \n"
-                    + "|_____| |_|  \\_\\|_|  \\_\\|______|";
 
-    private static final String MANUAL = "Here's how you can use me :3 \n"
-            + "\tTODO description - adding a generic task into your todolist\n"
-            + "\tDEADLINE description /by DD/MM/YYYY HH - adding a task with a due date and time\n"
-            + "\tEVENT description /from DD/MM/YYYY HH /to DD/MM/YYYY HH - adding an activity with start and end time\n"
-            + "\tMARK index - mark the task with given index as done\n"
-            + "\tUNMARKED index - mark the task with given index as not done\n"
-            + "\tFIND keyword - search for tasks with relevant keywords\n"
-            + "\tLIST - list all the task in the todolist\n"
-            + "\tDELETE index - remove task from the todolist";
+    /**
+     * Brief intro from Ekko and guide to use the chatbot
+     */
+    private static final String MANUAL = "Here's how you can use me :3 \n\n"
+            + "TODO description - adding a generic task into your todolist\n"
+            + "DEADLINE description /by DD/MM/YYYY HH - adding a task with a due date and time\n"
+            + "EVENT description /from DD/MM/YYYY HH /to DD/MM/YYYY HH - adding an activity with start and end time\n"
+            + "MARK index - mark the task with given index as done\n"
+            + "UNMARKED index - mark the task with given index as not done\n"
+            + "FIND keyword - search for tasks with relevant keywords\n"
+            + "LIST - list all the task in the todolist\n"
+            + "DELETE index - remove task from the todolist";
 
+    /**
+     * Initialise the todolist and storage file for an Ekko instance
+     */
     public Ekko() {
         this.storage = new Storage();
         this.todolist = new Todolist();
     }
 
+    /**
+     * Get the String output for any user input, and print greeting upon empty input
+     * @param input user input
+     * @return response from ekko
+     */
     public String getResponse(String input) {
+        // Check if the input is empty or null, and return the greeting
+        if (input == null || input.trim().isEmpty()) {
+            return greet();  // Call the greet method that returns the greeting text
+        }
+
         String[] parts = input.split(" ");
         try {
             Commands command = Parser.parseCommand(input);
@@ -95,7 +104,7 @@ public class Ekko {
          * Greet the user when starting the program.
          */
         public static String greet () {
-            return("Hello from\n" + LOGO + "\n" + MANUAL + "\nWhat can I do for you?\n(Input \"bye\" to exit)");
+            return("Hello from Ekko <3\n" + "\n" + MANUAL + "\nWhat can I do for you?\n(Input \"bye\" to exit)");
         }
 
         /**

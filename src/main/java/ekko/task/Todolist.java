@@ -94,6 +94,11 @@ public class Todolist {
             target.toString(), count);
     }
 
+    /**
+     * Find the task with keyword search
+     * @param keyword that the task description contain
+     * @return the task(s) containing the keyword(s)
+     */
     public String filter(String keyword) {
         List<Todo> filteredItems = new ArrayList<>();
         for (int i = 0; i < count; i++) {
