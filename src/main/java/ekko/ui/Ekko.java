@@ -17,15 +17,30 @@ public class Ekko {
     /**
      * Brief intro from Ekko and guide to use the chatbot
      */
-    private static final String MANUAL = "Here's how you can use me :3 \n\n"
-            + "TODO description - adding a generic task into your todolist\n"
-            + "DEADLINE description /by DD/MM/YYYY HH - adding a task with a due date and time\n"
-            + "EVENT description /from DD/MM/YYYY HH /to DD/MM/YYYY HH - adding an activity with start and end time\n"
-            + "MARK index - mark the task with given index as done\n"
-            + "UNMARKED index - mark the task with given index as not done\n"
-            + "FIND keyword - search for tasks with relevant keywords\n"
-            + "LIST - list all the task in the todolist\n"
-            + "DELETE index - remove task from the todolist";
+    private static final String MANUAL = """
+    Here's how you can use me :3
+    
+    📌 Task Management:
+    - TODO <description> ➝ Add a generic task to your to-do list.
+    - DEADLINE <description> /by DD/MM/YYYY HH ➝ Add a task with a due date and time.
+    - EVENT <description> /from DD/MM/YYYY HH /to DD/MM/YYYY HH ➝ Add an activity with a start and end time.
+    
+    ✅ Task Updates:
+    - MARK <index> ➝ Mark the task at the given index as done.
+    - UNMARK <index> ➝ Mark the task at the given index as not done.
+    
+    🔍 Searching & Listing:
+    - FIND <keyword> ➝ Search for tasks with relevant keywords.
+    - LIST ➝ Display all tasks and notes in your to-do list.
+    
+    🗑️ Deletion:
+    - DELETE <index> ➝ Remove a task from the to-do list.
+    
+    📝 Notes:
+    - NOTE /t <title> /d <description> ➝ Add a note.
+    - RMNOTE <title> ➝ Remove a note.
+    """;
+
 
     /**
      * Initialise the todolist and storage file for an Ekko instance
@@ -73,6 +88,8 @@ public class Ekko {
                     return Parser.parseNote(notelist, storage, input);
                 case RMNOTE:
                     return Parser.parseRMNote(notelist, storage, input);
+                case HOW:
+                    return MANUAL;
 
             }
         } catch (IllegalArgumentException e) {
