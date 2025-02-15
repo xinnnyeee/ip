@@ -1,5 +1,4 @@
 package ekko.core;
-import ekko.notes.Note;
 import ekko.notes.NotesCollection;
 import ekko.storage.Storage;
 import ekko.task.Todo;
@@ -200,6 +199,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse the NOTE command.
+     * @param notelist note collection in ekko
+     * @param storage storage instance
+     * @param input user input
+     * @return response message
+     */
     public static String parseNote(NotesCollection notelist,Storage storage, String input) {
         String title = input.split("/t ",2)[1].split("/d ", 2)[0].trim();
         String description = input.split("/d ",2)[1].trim();
@@ -208,6 +214,13 @@ public class Parser {
         return resp;
     }
 
+    /**
+     * Parse the RMNOTE command.
+     * @param notelist note collection in ekko
+     * @param storage storage instance in ekko
+     * @param input user input
+     * @return response message by ekko
+     */
     public static String parseRMNote(NotesCollection notelist, Storage storage, String input) {
         String title = input.split(" ", 2)[1];
         String resp = notelist.removeNote(title);
@@ -215,6 +228,12 @@ public class Parser {
         return resp;
     }
 
+    /**
+     * Parse the LIST command.
+     * @param notelist note collection in ekko
+     * @param todolist todolist in ekko
+     * @return string of both the task list and the note collection
+     */
     public static String parseList(NotesCollection notelist, Todolist todolist) {
         String todo = todolist.toString();
         String note = notelist.toString();
