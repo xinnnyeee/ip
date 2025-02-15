@@ -54,7 +54,7 @@ public class Todolist {
         return IntStream.range(0, list.size())  // Iterate over list with index
                 .mapToObj(i -> (i + 1) + ". " + list.get(i).toString())  // Prepend count to each task
                 .collect(Collectors.joining("\n"));  // Join them with new lines
-    }
+    } // stream is used here
 
     /**
      * Unmark a Todo on the list.
@@ -106,6 +106,7 @@ public class Todolist {
                 filteredItems.add(list.get(i));
             }
         }
+        // stream is used here
         return filteredItems.stream().map(Todo::toString).collect(Collectors.joining("\n"));
     }
 }
