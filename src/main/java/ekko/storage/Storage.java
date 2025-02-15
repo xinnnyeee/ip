@@ -1,8 +1,8 @@
 package ekko.storage;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+
+import ekko.notes.Note;
+import ekko.notes.NotesCollection;
 import ekko.task.Todolist;
 
 /**
@@ -11,11 +11,13 @@ import ekko.task.Todolist;
 public class Storage {
 
     private String dirPath;
-    private String filePath;
+    private String todoPath;
+    private String notePath;
 
     public Storage() {
         this.dirPath = makeDir();
-        this.filePath = createFile("ekko.txt");
+        this.todoPath = createFile("ekko.txt");
+        this.notePath = createFile("note.txt");
     }
 
     /**
@@ -51,18 +53,38 @@ public class Storage {
     }
 
     /**
-     * Updates the file in this storage to sync it with the current todolist.
+     * Updates both todolist and notelist in this storage to sync it with the current todolist.
      * @param todolist current todolist to sync.
      */
     public void updateFile(Todolist todolist) {
-        if (filePath == null) {
+        if (todoPath == null) {
             System.out.println("Error: File path is not initialized.");
             return;
         }
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(todoPath));
             bw.write(todolist.toString());
+
         } catch (IOException e) {
             System.out.println("Uh oh, something went wrong when trying to write into a file.");
         }
     }
+
+    /**
+     * Update the note tracking file to the latest change.
+     * @param notelist current notelist in the storage instance.
+     */
+    public void updateNotes(NotesCollection notelist) {
+        if (notePath == null) {
+            System.out.println("Error: File path is not initialized.");
+            return;
+        }
+        try {
+            BufferedWriter bw2 = new BufferedWriter(new FileWriter(notePath));
+            bw2.write(notelist.toString());
+        } catch (IOException e) {
+            System.out.println("Uh oh, something went wrong when trying to write into a file.");
+        }
+    }
+
 }

@@ -17,14 +17,6 @@ public class Todolist {
     }
 
     /**
-     * Get the number of current items in the to-do list.
-     * @return int
-     */
-    public int getCount() {
-        return count;
-    }
-
-    /**
      * Adding a Todo to the list.
      * @param task a todo
      * @return String notation for completing the task
@@ -37,16 +29,6 @@ public class Todolist {
     }
 
     /**
-     * Print out the todolist.
-     */
-    public void printList() {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 1; i <= count; i++) {
-            System.out.printf("%d. %s \n", i, this.list.get(i - 1).toString());
-        }
-    }
-
-    /**
      * Convert the todolist to a long String, separated by new lines.
      * @return long String separated by new lines
      */
@@ -54,7 +36,7 @@ public class Todolist {
         return IntStream.range(0, list.size())  // Iterate over list with index
                 .mapToObj(i -> (i + 1) + ". " + list.get(i).toString())  // Prepend count to each task
                 .collect(Collectors.joining("\n"));  // Join them with new lines
-    } // stream is used here
+    }
 
     /**
      * Unmark a Todo on the list.
@@ -106,7 +88,6 @@ public class Todolist {
                 filteredItems.add(list.get(i));
             }
         }
-        // stream is used here
         return filteredItems.stream().map(Todo::toString).collect(Collectors.joining("\n"));
     }
 }

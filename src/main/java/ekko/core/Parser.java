@@ -1,4 +1,6 @@
 package ekko.core;
+import ekko.notes.Note;
+import ekko.notes.NotesCollection;
 import ekko.storage.Storage;
 import ekko.task.Todo;
 import ekko.task.Event;
@@ -196,5 +198,32 @@ public class Parser {
         } catch (NumberFormatException e) {
             return "meow, please put a number after the command.";
         }
+    }
+
+    public static String parseNote(NotesCollection notelist,Storage storage, String input) {
+        String title = input.split("/t ",2)[1].split("/d ", 2)[0].trim();
+        String description = input.split("/d ",2)[1].trim();
+        String resp = notelist.addNote(title, description);
+        storage.updateNotes(notelist);
+        return resp;
+    }
+
+    public static String parseRMNote(NotesCollection notelist, Storage storage, String input) {
+        String title = input.split(" ", 2)[1];
+        String resp = notelist.removeNote(title);
+        storage.updateNotes(notelist);
+        return resp;
+    }
+
+    public static String parseList(NotesCollection notelist, Todolist todolist) {
+        String todo = todolist.toString();
+        String note = notelist.toString();
+        if (note.isEmpty()) {
+            note = "Meow, your note list is empty! Anything you want ekko to remember? ";
+        }
+        if (todo.isEmpty()) {
+            todo = "Meow, your task list is empty! Yayy let's take a break together~";
+        }
+        return "Your tasks: \n" + todo + "\n\nYour notes: \n" + note;
     }
 }

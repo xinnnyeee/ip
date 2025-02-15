@@ -2,6 +2,7 @@ package ekko.ui;
 
 import ekko.core.Commands;
 import ekko.core.Parser;
+import ekko.notes.NotesCollection;
 import ekko.storage.Storage;
 import ekko.task.Todolist;
 
@@ -11,6 +12,7 @@ import ekko.task.Todolist;
 public class Ekko {
     private Storage storage;
     private Todolist todolist;
+    private NotesCollection notelist;
 
     /**
      * Brief intro from Ekko and guide to use the chatbot
@@ -31,6 +33,7 @@ public class Ekko {
     public Ekko() {
         this.storage = new Storage();
         this.todolist = new Todolist();
+        this.notelist = new NotesCollection();
     }
 
     /**
@@ -55,7 +58,7 @@ public class Ekko {
                 case UNMARK:
                     return Parser.parseUnmark(todolist, storage, input);
                 case LIST:
-                    return todolist.toString();
+                    return Parser.parseList(notelist, todolist);
                 case DEADLINE:
                     return Parser.parseDeadline(todolist, storage, input);
                 case EVENT:
@@ -66,6 +69,11 @@ public class Ekko {
                     return Parser.parseMeow();
                 case FIND:
                     return Parser.parseFind(todolist, storage, input);
+                case NOTE:
+                    return Parser.parseNote(notelist, storage, input);
+                case RMNOTE:
+                    return Parser.parseRMNote(notelist, storage, input);
+
             }
         } catch (IllegalArgumentException e) {
             return"Meow, sorry I am just a little Ekko. ";

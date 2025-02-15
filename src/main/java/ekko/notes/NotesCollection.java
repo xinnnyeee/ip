@@ -17,24 +17,18 @@ public class NotesCollection {
 
     public String addNote(Note note) {
         notes.put(note.getTitle(), note.getDescription());
-        return "Ekko has helped you remember it!\n " + note.getTitle() + ": " + note.getDescription();
+        return "Ekko has helped you remember it!\n" + note.getTitle() + ": " + note.getDescription();
     }
 
-    public String removeNote(Note note) {
-        notes.remove(note.getTitle());
-        return "Ekko has helped you removed it!\n " + note.getTitle();
-    }
-
-    public Note getNote(String title) {
-        String des = notes.get(title);
-        return new Note(title, des);
+    public String removeNote(String title) {
+        notes.remove(title);
+        return "Ekko has helped you removed: " + title;
     }
 
     public String toString() {
-        return notes.entrySet()
-                    .stream()
-                    .map(e -> e.getKey() + ": " + e.getValue())
+        return notes.entrySet().stream().map(e -> e.getKey() + ": " + e.getValue())
                     .collect(Collectors.joining("\n"));
+
     }
 
 
