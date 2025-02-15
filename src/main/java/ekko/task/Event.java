@@ -17,6 +17,7 @@ public class Event extends Todo {
      */
     public Event(String description, LocalDateTime start, LocalDateTime end) {
         super(description);
+        assert start.isBefore(end) : "The start time must be before the end time.";
         this.start = start;
         this.end = end;
     }
