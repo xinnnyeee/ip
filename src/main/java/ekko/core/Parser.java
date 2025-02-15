@@ -1,7 +1,10 @@
 package ekko.core;
+import ekko.storage.Storage;
 import ekko.task.Todo;
 import ekko.task.Event;
 import ekko.task.Deadline;
+import ekko.task.Todolist;
+
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -70,56 +73,128 @@ public class Parser {
 
     /**
      * Parse input with command EVENT
+     * @param todolist todolist in ekko
+     * @param storage file in ekko
      * @param input String user input
      * @return new Event created
      */
-    public static Event parseEvent(String input) {
+    public static String parseEvent(Todolist todolist, Storage storage, String input) {
         String des = input.split(" ",2)[1];
         String start = des.split("/from ")[1].split(" /to")[0];
         LocalDateTime startTime = Parser.parseDateTime(start);
         String end = des.split("/to ")[1];
         LocalDateTime endTime = Parser.parseDateTime(end);
         des = des.split("/from")[0];
-        return new Event(des, startTime, endTime);
+        String resp = todolist.add(new Event(des, startTime, endTime));
+        storage.updateFile(todolist);
+        return resp;
     }
 
     /**
      * Parse input with command TODO to create a Todo object
+     * @param todolist todolist in ekko
+     * @param storage file in ekko
      * @param input String user input
      * @return new Todo created
      */
-    public static Todo parseTodo(String input) {
+    public static String parseTodo(Todolist todolist, Storage storage, String input) {
         String des = input.split(" ",2)[1];
-        return new Todo(des);
+        String resp = todolist.add(new Todo(des));
+        storage.updateFile(todolist);
+        return resp;
     }
 
     /**
      * Parse input with command DEADLINE to create a Deadline Object
+     * @param todolist todolist in ekko
+     * @param storage file in ekko
      * @param input String user input
      * @return new Deadline created
      */
-    public static Deadline parseDeadline(String input) {
+    public static String parseDeadline(Todolist todolist, Storage storage, String input) {
         String des = input.split(" ",2)[1].split("/by")[0];
         String stringDate = input.split("/by ")[1];
         LocalDateTime dueDateTime = Parser.parseDateTime(stringDate);
-        return new Deadline(des, dueDateTime);
+        String resp = todolist.add(new Deadline(des, dueDateTime));
+        storage.updateFile(todolist);
+        return resp;
     }
 
     /**
      * Output words of love (just an Easter egg)
-     * @param input user input
      * @return String easter egg
      */
-    public static String parseMeow(String input) {
+    public static String parseMeow() {
         return "Meow, I love you too.";
     }
 
     /**
      * Parse input with Find command.
+     * @param todolist todolist in ekko
+     * @param storage file in ekko
      * @param input String user input
      * @return search keyword
      */
-    public static String parseFind(String input) {
-        return input.split(" ",2)[1];
+    public static String parseFind(Todolist todolist, Storage storage, String input) {
+        String keyword = input.split(" ",2)[1];
+        String resp = todolist.filter(keyword);
+        if (resp.isBlank()) {
+            return "Nothing found meow, maybe you can add that into your list? ";
+        }
+        return "Here are the relevant items on your list: \n" + resp;
+    }
+
+    /**
+     * Parse the MARK command.
+     * @param todolist todolist in ekko
+     * @param storage file in ekko
+     * @param input from user
+     * @return Response from Ekko
+     */
+    public static String parseMark(Todolist todolist, Storage storage, String input) {
+        try {
+            int index = Integer.parseInt(input.split(" ")[1]);
+            String resp = todolist.mark(index);
+            storage.updateFile(todolist);
+            return resp;
+        } catch (NumberFormatException e) {
+            return "meow, please put a number after the command.";
+        }
+    }
+
+    /**
+     * Parse the UNMARK command.
+     * @param todolist todolist in ekko
+     * @param storage file in ekko
+     * @param input from user
+     * @return Response from Ekko
+     */
+    public static String parseUnmark(Todolist todolist, Storage storage, String input) {
+        try {
+            int index = Integer.parseInt(input.split(" ")[1]);
+            String resp = todolist.unmark(index);
+            storage.updateFile(todolist);
+            return resp;
+        } catch (NumberFormatException e) {
+            return "meow, please put a number after the command.";
+        }
+    }
+
+    /**
+     * Parse the DELETE command.
+     * @param todolist todolist in ekko
+     * @param storage file in ekko
+     * @param input from user
+     * @return Response from Ekko
+     */
+    public static String parseDelete(Todolist todolist, Storage storage, String input) {
+        try {
+            int index = Integer.parseInt(input.split(" ")[1]);
+            String resp = todolist.delete(index);
+            storage.updateFile(todolist);
+            return resp;
+        } catch (NumberFormatException e) {
+            return "meow, please put a number after the command.";
+        }
     }
 }
