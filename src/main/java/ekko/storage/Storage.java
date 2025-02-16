@@ -1,7 +1,9 @@
 package ekko.storage;
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
-import ekko.notes.Note;
 import ekko.notes.NotesCollection;
 import ekko.task.Todolist;
 
@@ -14,6 +16,9 @@ public class Storage {
     private String todoPath;
     private String notePath;
 
+    /**
+     * Instantiates a Storage object with one directory and two files.
+     */
     public Storage() {
         this.dirPath = makeDir();
         this.todoPath = createFile("ekko.txt");

@@ -11,6 +11,9 @@ public class Todolist {
     private int count;
     private List<Todo> list;
 
+    /**
+     * Instantiates a todolist with number of tasks and an arraylist
+     */
     public Todolist() {
         this.count = 0;
         this.list = new ArrayList<>();
@@ -25,7 +28,8 @@ public class Todolist {
         assert task != null : "Task cannot be null!";
         this.count += 1;
         list.add(task);
-        return String.format("Got it! I've added this task: \n%s\nNow you have %d task(s) in the list.", task.toString(), count);
+        return String.format("Got it! I've added this task: \n%s\nNow you have %d task(s) in the list.",
+                task.toString(), count);
     }
 
     /**
@@ -33,9 +37,9 @@ public class Todolist {
      * @return long String separated by new lines
      */
     public String toString() {
-        return IntStream.range(0, list.size())  // Iterate over list with index
-                .mapToObj(i -> (i + 1) + ". " + list.get(i).toString())  // Prepend count to each task
-                .collect(Collectors.joining("\n"));  // Join them with new lines
+        return IntStream.range(0, list.size())
+                .mapToObj(i -> (i + 1) + ". " + list.get(i).toString())
+                .collect(Collectors.joining("\n"));
     }
 
     /**

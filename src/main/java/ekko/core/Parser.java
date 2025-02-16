@@ -1,16 +1,17 @@
 package ekko.core;
-import ekko.notes.NotesCollection;
-import ekko.storage.Storage;
-import ekko.task.Todo;
-import ekko.task.Event;
-import ekko.task.Deadline;
-import ekko.task.Todolist;
 
-import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+
+import ekko.notes.NotesCollection;
+import ekko.storage.Storage;
+import ekko.task.Deadline;
+import ekko.task.Event;
+import ekko.task.Todo;
+import ekko.task.Todolist;
 
 /**
  * Handle the parsing of user's input.
@@ -62,12 +63,16 @@ public class Parser {
         for (DateTimeFormatter formatter : DATE_TIME_FORMATTERS) {
             try {
                 return LocalDateTime.parse(trimmedInput, formatter);
-            } catch (DateTimeParseException ignored) {}
+            } catch (DateTimeParseException e) {
+                continue;
+            }
         }
         for (DateTimeFormatter formatter : DATE_FORMATTERS) {
             try {
-                return LocalDate.parse(trimmedInput, formatter).atTime(23,59,59);
-            } catch (DateTimeParseException ignored) {}
+                return LocalDate.parse(trimmedInput, formatter).atTime(23, 59, 59);
+            } catch (DateTimeParseException e) {
+                continue;
+            }
         }
         throw new IllegalArgumentException("Invalid date or date-time format: " + trimmedInput);
     }
@@ -80,7 +85,7 @@ public class Parser {
      * @return new Event created
      */
     public static String parseEvent(Todolist todolist, Storage storage, String input) {
-        String des = input.split(" ",2)[1];
+        String des = input.split(" ", 2)[1];
         String start = des.split("/from ")[1].split(" /to")[0];
         LocalDateTime startTime = Parser.parseDateTime(start);
         String end = des.split("/to ")[1];
@@ -99,7 +104,7 @@ public class Parser {
      * @return new Todo created
      */
     public static String parseTodo(Todolist todolist, Storage storage, String input) {
-        String des = input.split(" ",2)[1];
+        String des = input.split(" ", 2)[1];
         String resp = todolist.add(new Todo(des));
         storage.updateFile(todolist);
         return resp;
@@ -113,7 +118,7 @@ public class Parser {
      * @return new Deadline created
      */
     public static String parseDeadline(Todolist todolist, Storage storage, String input) {
-        String des = input.split(" ",2)[1].split("/by")[0];
+        String des = input.split(" ", 2)[1].split("/by")[0];
         String stringDate = input.split("/by ")[1];
         LocalDateTime dueDateTime = Parser.parseDateTime(stringDate);
         String resp = todolist.add(new Deadline(des, dueDateTime));
@@ -137,7 +142,7 @@ public class Parser {
      * @return search keyword
      */
     public static String parseFind(Todolist todolist, Storage storage, String input) {
-        String keyword = input.split(" ",2)[1];
+        String keyword = input.split(" ", 2)[1];
         String resp = todolist.filter(keyword);
         if (resp.isBlank()) {
             return "Nothing found meow, maybe you can add that into your list? ";
@@ -206,9 +211,9 @@ public class Parser {
      * @param input user input
      * @return response message
      */
-    public static String parseNote(NotesCollection notelist,Storage storage, String input) {
-        String title = input.split("/t ",2)[1].split("/d ", 2)[0].trim();
-        String description = input.split("/d ",2)[1].trim();
+    public static String parseNote(NotesCollection notelist, Storage storage, String input) {
+        String title = input.split("/t ", 2)[1].split("/d ", 2)[0].trim();
+        String description = input.split("/d ", 2)[1].trim();
         String resp = notelist.addNote(title, description);
         storage.updateNotes(notelist);
         return resp;
@@ -221,7 +226,7 @@ public class Parser {
      * @param input user input
      * @return response message by ekko
      */
-    public static String parseRMNote(NotesCollection notelist, Storage storage, String input) {
+    public static String parseRMnote(NotesCollection notelist, Storage storage, String input) {
         String title = input.split(" ", 2)[1];
         String resp = notelist.removeNote(title);
         storage.updateNotes(notelist);

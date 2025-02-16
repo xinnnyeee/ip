@@ -1,4 +1,5 @@
 package ekko.core;
+
 /**
  * Usable commands of the program Ekko.
  */

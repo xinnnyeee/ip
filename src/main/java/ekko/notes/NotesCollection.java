@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
  * A collection of Notes
  */
 public class NotesCollection {
-    HashMap<String, String> notes;
+    private HashMap<String, String> notes;
 
     /**
      * HashMap used for easy look up

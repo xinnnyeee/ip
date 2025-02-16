@@ -50,7 +50,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        assert input != null: "User input cannot be null.";
+        assert input != null : "User input cannot be null.";
         String response = ekko.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
