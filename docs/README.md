@@ -1,30 +1,82 @@
-# EKKO User Guide
+# Ekko - Your Personal Task Manager
 
-// Update the title above to match the actual product name
+Ekko is a simple, interactive task manager built with JavaFX. It helps users keep track of tasks, deadlines, and notes efficiently.
 
-// Product screenshot goes here
+## Features
 
-// Product intro goes here
+### 📝 Task Management
+- **TODO**: Add a general task.
+  ```
+  TODO <description>
+  ```
+- **DEADLINE**: Add a task with a due date and time.
+  ```
+  DEADLINE <description> /by DD/MM/YYYY HH:MM
+  ```
+- **EVENT**: Add an event with a start and end time.
+  ```
+  EVENT <description> /from DD/MM/YYYY HH:MM /to DD/MM/YYYY HH:MM
+  ```
 
-## Adding deadlines
+### ✅ Task Updates
+- **Mark Task as Done**:
+  ```
+  MARK <index>
+  ```
+- **Unmark Task as Not Done**:
+  ```
+  UNMARK <index>
+  ```
 
-// Describe the action and its outcome.
+### 🔍 Searching & Listing
+- **Find Tasks by Keyword**:
+  ```
+  FIND <keyword>
+  ```
+- **List All Tasks and Notes**:
+  ```
+  LIST
+  ```
 
-// Give examples of usage
+### 🗑️ Deletion
+- **Delete a Task**:
+  ```
+  DELETE <index>
+  ```
 
-Example: `keyword (optional arguments)`
+### 📝 Notes
+- **Add a Note**:
+  ```
+  NOTE /t <title> /d <description>
+  ```
+- **Remove a Note**:
+  ```
+  RMNOTE <title>
+  ```
 
-// A description of the expected outcome goes here
+## 💾 Storage
+Ekko automatically saves tasks and notes to a local file (`ekko.txt`) in a `data` directory. Your tasks persist even after exiting the program.
 
-```
-expected output
-```
+## 🚀 Getting Started
 
-## Feature ABC
+### Prerequisites
+- Java 17 or later
+- JavaFX 17
 
-// Feature details
+### Running Ekko
+1. Clone this repository:
+   ```sh
+   git clone https://github.com/your-username/ekko.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd ekko
+   ```
+3. Compile and run the program:
+   ```sh
+   javac -d bin src/ekko/*.java
+   java -cp bin ekko.Main
+   ```
+---
+Enjoy using Ekko! 🎉 If you have any feature requests or issues, feel free to open an issue or contribute to the project!
 
-
-## Feature XYZ
-
-// Feature details

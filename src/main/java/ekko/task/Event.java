@@ -28,7 +28,7 @@ public class Event extends Todo {
      */
     @Override
     public String toString() {
-        return String.format("[E] %s %s (from: %s to: %s)", 
+        return String.format("[E] %s %s (from: %s to: %s)",
             super.printDone(), super.printDes(), this.start.toString(), this.end.toString());
     }
 }

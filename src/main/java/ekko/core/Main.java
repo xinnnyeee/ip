@@ -1,14 +1,14 @@
 package ekko.core;
-
-import ekko.ui.Ekko;
 import java.io.IOException;
 
 import ekko.MainWindow;
+import ekko.ui.Ekko;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 
 /**
  * A GUI for Duke using FXML.
@@ -23,9 +23,9 @@ public class Main extends Application {
     /**
      * Start the application
      * @param stage the primary stage for this application, onto which
-     * the application scene can be set.
-     * Applications may create other stages, if needed, but they will not be
-     * primary stages.
+     *              the application scene can be set.
+     *              Applications may create other stages, if needed, but they will not be
+     *              primary stages.
      */
     @Override
     public void start(Stage stage) {
