@@ -38,6 +38,8 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Ekko Chatbot");
+            stage.setMinHeight(220);
+            stage.setMinWidth(417);
             fxmlLoader.<MainWindow>getController().setEkko(ekko);
             stage.setOnCloseRequest(event -> System.exit(0)); // Ensure proper exit
             stage.show();
