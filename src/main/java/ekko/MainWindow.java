@@ -1,5 +1,6 @@
 package ekko;
 import ekko.ui.Ekko;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -33,6 +34,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.setOnScroll(event -> {
+            double deltaY = event.getDeltaY(); // Get scroll amount
+            double height = scrollPane.getContent().getBoundsInLocal().getHeight();
+            double vValue = scrollPane.getVvalue();
+
+            // Adjust scrolling speed
+            scrollPane.setVvalue(vValue - deltaY / height);
+        });
     }
 
     /**
@@ -56,6 +65,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getEkkoDialog(response, ekkoImage)
         );
+        // Ensure the ScrollPane scrolls to the bottom
+        Platform.runLater(() -> {
+            scrollPane.vvalueProperty().unbind();
+            scrollPane.setVvalue(1.0);
+        });
         userInput.clear();
     }
 

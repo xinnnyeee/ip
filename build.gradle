@@ -42,7 +42,7 @@ test {
 }
 
 application {
-    mainClass.set("ekko.ui.Launcher")
+    mainClass.set("ekko.Launcher")
 }
 
 shadowJar {

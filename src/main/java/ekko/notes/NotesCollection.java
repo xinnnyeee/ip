@@ -24,7 +24,7 @@ public class NotesCollection {
      */
     public String addNote(String title, String content) {
         notes.put(title, content);
-        return "Ekko has helped you remember it!\n " + title + ": " + content;
+        return "Ekko has helped you remember it!\n" + title + ": " + content;
     }
 
     /**
