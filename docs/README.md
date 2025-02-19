@@ -66,18 +66,15 @@ Ekko automatically saves tasks and notes to a local file (`ekko.txt`) in a `data
 - JavaFX 17
 
 ### Running Ekko
-1. Clone this repository:
+1. Download the JAR file from the latest release v2.0
+  
+2. Navigate to the Downloads directory:
    ```sh
-   git clone https://github.com/your-username/ekko.git
+   cd Downloads/
    ```
-2. Navigate to the project directory:
+3. Run the program:
    ```sh
-   cd ekko
-   ```
-3. Compile and run the program:
-   ```sh
-   javac -d bin src/ekko/*.java
-   java -cp bin ekko.Main
+   java -jar ekko.jar
    ```
 ---
 Enjoy using Ekko! 🎉 If you have any feature requests or issues, feel free to open an issue or contribute to the project!
