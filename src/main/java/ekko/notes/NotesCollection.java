@@ -54,8 +54,5 @@ public class NotesCollection {
     public String toString() {
         return notes.entrySet().stream().map(e -> e.getKey() + ": " + e.getValue())
                     .collect(Collectors.joining("\n"));
-
     }
-
-
 }

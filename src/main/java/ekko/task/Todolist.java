@@ -48,6 +48,9 @@ public class Todolist {
      * @return completion message
      */
     public String unmark(int index) {
+        if (index <= 0 || index > list.size()) {
+            return "Beware! You can't unmark a task that's not on the list meow!";
+        }
         Todo target = list.get(index - 1);
         assert target.isDone() : "The selected task hasn't been marked meow!";
         target.unDo();
@@ -61,6 +64,9 @@ public class Todolist {
      */
     public String mark(int index) {
         assert index > 0 && index <= count : "Index out of bounds for marking task!";
+        if (index <= 0 || index > list.size()) {
+            return "Beware! You can't mark a task that's not on the list meow!";
+        }
         Todo target = list.get(index - 1);
         target.markDone();
         return String.format("Yippee! One task off the list: \n%s", target);
@@ -73,6 +79,9 @@ public class Todolist {
      */
     public String delete(int index) {
         assert index > 0 && index <= count : "Selected task not in your list!";
+        if (index <= 0 || index > list.size()) {
+            return "You can't delete a task that's not on the list meow!";
+        }
         Todo target = list.get(index - 1);
         list.remove(index - 1);
         count -= 1;

@@ -9,8 +9,10 @@ import ekko.task.Todo;
 import ekko.task.Todolist;
 
 import java.time.LocalDateTime;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+// used AI to improve and generate JUnit test cases
 public class TestParser {
 
     private Todolist todolist;
