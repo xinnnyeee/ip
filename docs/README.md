@@ -2,6 +2,8 @@
 
 Ekko is a simple, interactive task manager built with JavaFX. It helps users keep track of tasks, deadlines, and notes efficiently.
 
+Notice all commands are capitalised? Don't worry, all commands are made case-insensitive, so you can type in anyhow you want! 
+
 ## Features
 
 ### 📝 Task Management
