@@ -1,10 +1,21 @@
-# Ekko - Your Personal Task Manager
+# 🐱 Ekko - Your Personal Task Manager
+
+(...and emotional support cat <3 Try typing in meow! )
 
 Ekko is a simple, interactive task manager built with JavaFX. It helps users keep track of tasks, deadlines, and notes efficiently.
 
-Notice all commands are capitalised? Don't worry, all commands are made case-insensitive, so you can type in anyhow you want! 
+> To ekko the black cat, you're an orange, which ekko mistook for one of his orange wool balls. 
+"Those balls don't tend to be too intellectual, " and ekko is a helpful cat, "guess I would
+help them remember stuff...only if they ask first! "
+
+Notice all commands are capitalised? Don't worry, ekko is considerate of your intelligence! All commands are made __*case-insensitive*__, 
+so you can type in anyhow you want! 
 
 ## Features
+
+### ⌨️ Get In-App User Manual by hitting __*ENTER*__
+
+- Just send in a blank message, and Ekko would respond you with a guide!
 
 ### 📝 Task Management
 - **TODO**: Add a general task.
