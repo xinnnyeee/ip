@@ -10,30 +10,39 @@ Notice all commands are capitalised? Don't worry, all commands are made case-ins
 - **TODO**: Add a general task.
   ```
   TODO <description>
+  e.g. todo running
   ```
-- **DEADLINE**: Add a task with a due date and time.
+- **DEADLINE**: Add a task with a due date and time. For deadlines, **_time is optional_**, and its omission would result 
+in the time being automatically set to **_2359_**.
   ```
-  DEADLINE <description> /by DD/MM/YYYY HH:MM
+  DEADLINE <description> /by DD/MM/YYYY (HH:MM)
+  e.g. deadline homework /by 10/02/2025
+    or deadline homework /by 10/02/2025 23:59
   ```
-- **EVENT**: Add an event with a start and end time.
+- **EVENT**: Add an event with a start and end time. For events, time is compulsory, 
+but you may omit the minute if it's a whole hour. 
   ```
-  EVENT <description> /from DD/MM/YYYY HH:MM /to DD/MM/YYYY HH:MM
+  EVENT <description> /from DD/MM/YYYY HH(:MM) /to DD/MM/YYYY HH(:MM)
+  e.g. event dinner /from 10/09/2025 12 /to 10/09/2025 13
   ```
 
 ### ✅ Task Updates
 - **Mark Task as Done**:
   ```
   MARK <index>
+  e.g. mark 1
   ```
 - **Unmark Task as Not Done**:
   ```
   UNMARK <index>
+  e.g. unmark 1
   ```
 
 ### 🔍 Searching & Listing
 - **Find Tasks by Keyword**:
   ```
   FIND <keyword>
+  e.g. find reading
   ```
 - **List All Tasks and Notes**:
   ```
@@ -44,16 +53,19 @@ Notice all commands are capitalised? Don't worry, all commands are made case-ins
 - **Delete a Task**:
   ```
   DELETE <index>
+  e.g. delete 0
   ```
 
 ### 📝 Notes
 - **Add a Note**:
   ```
   NOTE /t <title> /d <description>
+  e.g. note /t height /d 185cm
   ```
 - **Remove a Note**:
   ```
   RMNOTE <title>
+  e.g. rmnote height
   ```
 
 ## 💾 Storage
