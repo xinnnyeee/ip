@@ -25,4 +25,10 @@ public class Deadline extends Todo {
     public String toString() {
         return String.format("[D] %s %s (by: %s)", super.printDone(), super.printDes(), this.dueDate.toString());
     }
+
+    @Override
+    public String toStore() {
+        return "DEADLINE//" + super.storeDone() + "//" + super.printDes() + "//"
+                + this.dueDate.toString();
+    }
 }

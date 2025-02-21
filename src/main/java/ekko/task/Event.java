@@ -33,4 +33,10 @@ public class Event extends Todo {
         return String.format("[E] %s %s (from: %s to: %s)",
             super.printDone(), super.printDes(), this.start.toString(), this.end.toString());
     }
+
+    @Override
+    public String toStore() {
+        return "EVENT//" + super.storeDone() + "//" + super.printDes() + "//"
+                + this.start.toString() + "//" + this.end.toString();
+    }
 }

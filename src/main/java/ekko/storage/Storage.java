@@ -1,10 +1,16 @@
 package ekko.storage;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
+import ekko.core.Commands;
+import ekko.core.Parser;
+import ekko.notes.Note;
 import ekko.notes.NotesCollection;
+import ekko.task.Deadline;
+import ekko.task.Event;
+import ekko.task.Todo;
 import ekko.task.Todolist;
 
 /**
@@ -66,10 +72,8 @@ public class Storage {
             System.out.println("Error: File path is not initialized.");
             return;
         }
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(todoPath));
-            bw.write(todolist.toString());
-
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(todoPath))) {
+            bw.write(todolist.toStore());
         } catch (IOException e) {
             System.out.println("Uh oh, something went wrong when trying to write into a file.");
         }
@@ -84,12 +88,76 @@ public class Storage {
             System.out.println("Error: File path is not initialized.");
             return;
         }
-        try {
-            BufferedWriter bw2 = new BufferedWriter(new FileWriter(notePath));
+        try (BufferedWriter bw2 = new BufferedWriter(new FileWriter(notePath))) {
             bw2.write(notelist.toString());
         } catch (IOException e) {
             System.out.println("Uh oh, something went wrong when trying to write into a file.");
         }
     }
 
+    /**
+     * Convert a line in file to a Todo
+     */
+    public static Todo convertToTask(String input) {
+        String[] parts = input.split("//");
+        Commands taskType = Commands.valueOf(parts[0]);
+        boolean isDone = Boolean.parseBoolean(parts[1]);
+        switch (taskType) {
+        case TODO:
+            return new Todo(parts[2], isDone);
+        case DEADLINE:
+            return new Deadline(parts[2], Parser.parseDateTime(parts[3]));
+        case EVENT:
+            return new Event(parts[2], Parser.parseDateTime(parts[3]),
+                    Parser.parseDateTime(parts[4]));
+        default:
+            return null;
+        }
+    }
+
+    /**
+     * Convert String to Note
+     */
+    public Note convertToNote(String input) {
+        String[] parts = input.split(": ");
+        return new Note(parts[0].trim(), parts[1].trim());
+    }
+
+    /**
+     * Load Tasklist from hard disk
+     */
+    public Todolist loadTask() throws FileNotFoundException, IOException {
+        Todolist todolist = new Todolist();
+        File file = new File(todoPath);
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                todolist.add(convertToTask(line));
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return todolist;
+    }
+
+    /**
+     * Load notes from hard disk
+     */
+    public NotesCollection loadNotes() throws FileNotFoundException, IOException {
+        NotesCollection notes = new NotesCollection();
+        File file = new File(notePath);
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                notes.addNote(convertToNote(line));
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return notes;
+    }
 }

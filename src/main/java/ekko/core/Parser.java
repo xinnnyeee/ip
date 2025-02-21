@@ -20,6 +20,8 @@ public class Parser {
 
     private static final List<DateTimeFormatter> DATE_TIME_FORMATTERS = List.of(
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),
+            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"),
+            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"),
             DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"),
             DateTimeFormatter.ofPattern("dd MM yyyy HH:mm"),
             DateTimeFormatter.ofPattern("yyyy MM dd HH:mm"),

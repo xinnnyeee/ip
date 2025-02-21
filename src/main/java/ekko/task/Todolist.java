@@ -43,6 +43,15 @@ public class Todolist {
     }
 
     /**
+     * Convert todolist to a storable string
+     */
+    public String toStore() {
+        return list.stream()
+                .map(item -> item.toStore())
+                .collect(Collectors.joining("\n"));
+    }
+
+    /**
      * Unmark a Todo on the list.
      * @param index the index number of the item
      * @return completion message

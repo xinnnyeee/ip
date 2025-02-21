@@ -6,6 +6,9 @@ import ekko.notes.NotesCollection;
 import ekko.storage.Storage;
 import ekko.task.Todolist;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 /**
  * Handle user interface functionalities.
  */
@@ -47,8 +50,14 @@ public class Ekko {
      */
     public Ekko() {
         this.storage = new Storage();
-        this.todolist = new Todolist();
-        this.notelist = new NotesCollection();
+        try {
+            this.todolist = storage.loadTask();
+            this.notelist = storage.loadNotes();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

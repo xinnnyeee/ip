@@ -16,6 +16,14 @@ public class Todo {
     }
 
     /**
+     * Instantiate a task
+     */
+    public Todo(String description, boolean isDone) {
+        this.description = description;
+        this.done = isDone;
+    }
+
+    /**
      * Mark the task as done.
      */
     public void markDone() {
@@ -57,11 +65,22 @@ public class Todo {
         }
     }
 
+    public String storeDone() {
+        return isDone() ? "true" : "false";
+    }
+
     /**
      * Return the String representation of the entire task.
      * @return the task type, the checkbox and the task description
      */
     public String toString() {
         return String.format("[T] %s %s", printDone(), printDes());
+    }
+
+    /**
+     * Convert to storable string
+     */
+    public String toStore() {
+        return "TODO//" + storeDone() + "//" + description;
     }
 }
