@@ -36,7 +36,8 @@ public class Note {
      * @return string format of a note
      */
     public String toString() {
-        return title + ": " + description;
+        return NotesCollection.capitalizeFirstLetter(title)
+                + ": " + NotesCollection.capitalizeFirstLetter(description);
     }
 }
 

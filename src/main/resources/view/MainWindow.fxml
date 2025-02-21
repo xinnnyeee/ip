@@ -14,7 +14,7 @@
                 <VBox fx:id="dialogContainer" />
             </content>
         </ScrollPane>
-        <TextField fx:id="userInput" onAction="#handleUserInput" prefHeight="41.0" promptText="Hit &quot;Enter&quot; for user guide" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="76.0">
+        <TextField fx:id="userInput" onAction="#handleUserInput" prefHeight="41.0" promptText="Hit &quot;Enter&quot; for user guide" stylesheets="@../css/main.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="76.0">
          <font>
             <Font name="Andale Mono" size="13.0" />
          </font></TextField>
